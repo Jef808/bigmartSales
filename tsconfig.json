@@ -6,18 +6,17 @@
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
+    "isolatedModules": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "allowJs": true,
     "lib": ["esnext", "dom"],
     "noEmit": true,
     "types": [
       "vite/client",
       "vite-plugin-vue-component-preview/client"
     ],
-    "baseUrl": "./src/",
-    "rootDir": "./src/"
+    "baseUrl": "./src/"
   },
   "include": ["./src/**/*.ts", "./src/**/*.d.ts", "./src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]

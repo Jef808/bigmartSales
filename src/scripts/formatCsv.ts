@@ -1,13 +1,13 @@
 // Takes a raw string containing csv data (the first line
 // of which being the column headers) and formats it
 // into an object { header: string[], body: string[][] }.
-export function formatCsvData(csvString: string, nbRows: number) {
+export function formatCsvData(csvString: string, nbRows?: number) {
 
     if (csvString.length === 0) {
         return { header: [] as string[], body: [] as string[][] };
     }
 
-    const _result = csvString.split("\n").slice(0, nbRows + 1);
+    const _result = csvString.split("\n").slice(0, (nbRows || Infinity));
     const header = formatCsvHeader(_result[0]);
     const body = _result.slice(1).map((row) => formatCsvRow(row));
 
@@ -21,7 +21,7 @@ function formatCsvHeader(csvHeader: string) {
 
 // Split along commas and parse into an integer, float
 // or string according to the record type.
-function formatCsvRow(row: string[]) {
+function formatCsvRow(row: string) {
     return row.split(",").map((rec, idx) => {
         switch (idx) {
             case 1:
@@ -40,7 +40,7 @@ function formatCsvRow(row: string[]) {
             case 10:
                 return (rec.length > 0 ? rec : "N/A");
             default:
-                throw new Error("formatCsv:Too many records in row", idx);
+                throw new Error(`formatCsv:Too many records in row ${idx}`);
         }
     });
 }

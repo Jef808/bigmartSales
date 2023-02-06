@@ -1,8 +1,22 @@
+<script lang="ts">
+ import { defineComponent } from 'vue';
+ export default defineComponent({ name: 'DataRow' });
+ export interface Props {
+     row: (string | number)[],
+ }
+ export interface Emits {
+     (e: "columnSelect", idx: number): void,
+ }
+</script>
+
 <!-- Script -->
 <script setup lang="ts">
- import { computed } from 'vue';
+ defineProps<Props>();
+ const emit = defineEmits<Emits>();
 
- const props = defineProps<{ row: (string | number)[] }>();
+ function onClick(idx: number): void {
+     emit("columnSelect", idx);
+ }
 </script>
 
 <!-- Template -->
@@ -10,7 +24,9 @@
 <template>
     <tr>
         <td v-for="(entry, index) in row"
-            :key="index">
+            :key="index"
+            @click="onClick(index)"
+        >
             {{ entry }}
         </td>
     </tr>
