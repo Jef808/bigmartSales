@@ -17,7 +17,6 @@
     <tr>
         <td v-for="(entry, index) in row"
             :key="index"
-            @click="onClick(index)"
         >
             {{ entry }}
         </td>
