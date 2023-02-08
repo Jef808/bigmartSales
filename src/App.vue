@@ -51,6 +51,12 @@ const dataProps = computed(() => ({
   isReady: isReady.value,
   selectedColumn: selectedColumnIdx.value,
 }));
+
+function onTableClick(e: Event) {
+  console.log("App: DataTable was clicked:", e);
+
+  console.log("event.target:", e.target, "event.currentTarget:", e.currentTarget)
+ }
 </script>
 
 <template>
@@ -69,7 +75,7 @@ const dataProps = computed(() => ({
           </option>
         </select>
         <label for="select-column-select">
-            Select column: {{ columnHeaders[selectedColumnIdx]  }}
+            <span >Select column: {{ columnHeaders[selectedColumnIdx]  }}</span>
         </label>
       </div>
     </div>
@@ -77,7 +83,7 @@ const dataProps = computed(() => ({
       <BarChart v-bind="dataProps" />
     </div>
     <div id="table" class="container">
-      <DataTable v-bind="dataProps" />
+      <DataTable v-bind="dataProps" @click.stop.prevent="onTableClick"/>
     </div>
   </div>
 </template>

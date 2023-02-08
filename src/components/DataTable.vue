@@ -6,7 +6,7 @@
 -->
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 export default defineComponent({ name: "DataTable" });
 export interface Props {
   header: string[];
@@ -20,9 +20,24 @@ export interface Props {
 import DataRow from "./DataRow.vue";
 import HeaderRow from "./HeaderRow.vue";
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   selectedColumn: -1,
 });
+
+const getStyle = (p: Props) => {
+
+ };
+
+
+
+function onClick(e: Event) {
+   console.log("DataTable: Received click:", e);
+   console.log("target:", e.target, "currentTarget:", e.currentTarget);
+}
+
+function getColumnIdx(e: Event) {
+   (e.target as HTMLElement).closest("tr")
+ }
 </script>
 
 <template>
@@ -30,10 +45,16 @@ withDefaults(defineProps<Props>(), {
     <div v-if="isReady">
       <table>
         <thead>
-          <HeaderRow :row="header" :header="true" />
+          <HeaderRow
+            :row="header" />
         </thead>
         <tbody>
-          <DataRow v-for="row in body" :key="row[0]" :row="row" />
+          <DataRow
+            v-for="row in body"
+            :key="row[0]"
+            :row="row"
+            @click.stop="onClick"
+          />
         </tbody>
       </table>
     </div>

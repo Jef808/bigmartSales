@@ -40,9 +40,8 @@ function makeCounter(index: number) {
     const v = `${r[index]}`;
     c[v] = (c[v] || 0) + 1;
     return c;
-  }, Object.create(null) as Record<string | number, number>)
+  }, {} as Record<string | number, number>);
 }
-
 // Compute the number of occurence of each distinct record
 // and return results formatted as follows:
 // {
@@ -54,7 +53,7 @@ const chartData = computed(() => {
    const uniqCounter = Object.entries(
      makeCounter(props.selectedColumn)).sort(orderFn);
    function orderFn(a: [string,number], b: [string,number]) {
-     return a[1] > b[1] ? -1 : 1;
+       return a[1] > b[1] ? -1 : 1;
    }
    return {
      labels: uniqCounter.map(([name,]) => name),

@@ -12,10 +12,6 @@
 <script setup lang="ts">
  const props = defineProps<Props>();
  const emit = defineEmits<Emits>();
-
- function onClick(idx: number): void {
-     emit("columnSelect", idx);
- }
 </script>
 
 <template>
@@ -23,7 +19,6 @@
         <th
             v-for="(entry, index) in row"
             :key="index"
-            @click="onClick(index)"
         >
             {{ entry }}
         </th>

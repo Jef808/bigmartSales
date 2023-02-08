@@ -4,19 +4,11 @@
  export interface Props {
      row: (string | number)[],
  }
- export interface Emits {
-     (e: "columnSelect", idx: number): void,
- }
 </script>
 
 <!-- Script -->
 <script setup lang="ts">
  defineProps<Props>();
- const emit = defineEmits<Emits>();
-
- function onClick(idx: number): void {
-     emit("columnSelect", idx);
- }
 </script>
 
 <!-- Template -->
